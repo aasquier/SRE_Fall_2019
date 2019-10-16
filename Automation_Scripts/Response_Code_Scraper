@@ -1,7 +1,0 @@
-#!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
-
-import subprocess
-
-# subprocess.call('sudo apt update')
-# subprocess.call('sudo apt install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx curl')
-subprocess.call('ll')
