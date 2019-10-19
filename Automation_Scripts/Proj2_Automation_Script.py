@@ -14,13 +14,13 @@ def main():
     G_DeployAndTestDjangoApp()
 
 def A_CreateVM():
-    print("A: Creating a VM and Install Infrastructure Softwareprint\n")
-    os.system('sudo apt update')
-    os.system('sudo apt install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx curl')
+    print("\n\n=== A: Creating a VM and Install Infrastructure Softwareprint===\n")
+    run('sudo apt update')
+    run('sudo apt install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx curl')
 
 def B_CreateDatabase():
-    print("B: Creating a Postgres Database\n")
-    os.system('sudo -u postgres psql')
+    print("\n=== B: Creating a Postgres Database ===\n")
+    run('sudo -u postgres psql')
     os.system('CREATE DATABASE sreproject;')
     os.system("CREATE USER sreprojectuser WITH PASSWORD 'trump';")
     os.system("ALTER ROLE sreprojectuser SET client_encoding TO 'utf8';")
@@ -30,7 +30,7 @@ def B_CreateDatabase():
     os.system('\\q')
 
 def C_CreateVirtualPythonEnv():
-    print("C: Creating an Isolated Python Environment\n")
+    print("=== C: Creating an Isolated Python Environment ===\n")
     os.system('sudo -H pip3 install --upgrade pip')
     os.system('sudo -H pip3 install virtualenv')
     os.system('mkdir ~/sreprojectdir')
@@ -40,7 +40,7 @@ def C_CreateVirtualPythonEnv():
     os.system('pip install django gunicorn psycopg2-binary')
 
 def D_CreateDjangoProject():
-    print("D: Creating and Configuring a New Django Project\n")
+    print("=== D: Creating and Configuring a New Django Project ===\n")
     os.system('django-admin.py startproject sreproject ~/sreprojectdir')
     os.system('cd ~/sreprojectdir/sreproject')
     os.system('cp ~/Automation/settings.py ./settings.py')
@@ -63,7 +63,7 @@ def D_CreateDjangoProject():
     input("Press Enter to continue...")
 
 def E_RunGunicornServer():
-    print("E: Integrating Gunicorn Application Server\n")
+    print("=== E: Integrating Gunicorn Application Server ===\n")
     os.system('cd ~/sreprojectdir')
     os.system('gunicorn --bind 0.0.0.0:8000 sreproject.wsgi')
 
@@ -71,7 +71,7 @@ def E_RunGunicornServer():
     input("Press Enter to continue...")
 
 def F_IntegrateNGINXListener():
-    print("F: Integrating NGINX Web Listener\n")
+    print("=== F: Integrating NGINX Web Listener ===\n")
     os.system('sudo su -')
     os.system('cd /etc/nginx/sites-available')
     os.system('cp /home/aasquier/Automation/sreproject ./')
@@ -86,7 +86,7 @@ def F_IntegrateNGINXListener():
     input("Press Enter to continue...")
 
 def G_DeployAndTestDjangoApp():
-    print("G: Deploying and Testing Application\n")
+    print("=== G: Deploying and Testing Application ===\n")
     print("Checking Django was installed...")
     os.system("python -m django --version")
     os.system("django-admin startproject djangoSite")
@@ -101,5 +101,9 @@ def greeting():
     print("  E: Integrate Gunicorn Application Server")
     print("  F: Integrate NGINX Web Listener")
     print("  G: Deploy and Test Application")
+
+def run(command):
+    print("\n* Running: " + command)
+    os.system(command)
 
 main()
