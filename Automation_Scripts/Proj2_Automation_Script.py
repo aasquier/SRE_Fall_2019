@@ -1,10 +1,15 @@
 #!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 
 import os
+import sys
 import webbrowser
 
 def main():
     greeting()
+    #stepsToRun = sys.argv[1] or steps
+    #steps = [A_CreateVM, B_CreateDatabase, C_CreateVirtualPythonEnv, D_CreateDjangoProject, E_RunGunicornServer, F_IntegrateNGINXListener, G_DeployAndTestDjangoApp]
+    #map(lambda stepFunc: stepFunc(), steps)
+
     A_CreateVM()
     B_CreateDatabase()
     C_CreateVirtualPythonEnv()
@@ -20,14 +25,18 @@ def A_CreateVM():
 
 def B_CreateDatabase():
     print("\n=== B: Creating a Postgres Database ===\n")
-    run('sudo -u postgres psql')
-    os.system('CREATE DATABASE sreproject;')
-    os.system("CREATE USER sreprojectuser WITH PASSWORD 'trump';")
-    os.system("ALTER ROLE sreprojectuser SET client_encoding TO 'utf8';")
-    os.system("ALTER ROLE sreprojectuser SET default_transaction_isolation TO 'read committed';")
-    os.system("ALTER ROLE sreprojectuser SET timezone TO 'UTC';")
-    os.system('GRANT ALL PRIVILEGES ON DATABASE sreproject TO sreprojectuser;')
-    os.system('\\q')
+    print("Need to run something like this here: psql -U postgres postgres -f setupDB.sql\n")
+    # run('psql -U postgres postgres -f setupDB.sql')
+
+    ### This doesn't work - it doesn't type the commands into postgres interactive mode
+    #run('sudo -u postgres psql')
+    # os.system('CREATE DATABASE sreproject;')
+    # os.system("CREATE USER sreprojectuser WITH PASSWORD 'trump';")
+    # os.system("ALTER ROLE sreprojectuser SET client_encoding TO 'utf8';")
+    # os.system("ALTER ROLE sreprojectuser SET client_encoding TO 'utf8';")
+    # os.system("ALTER ROLE sreprojectuser SET timezone TO 'UTC';")
+    # os.system('GRANT ALL PRIVILEGES ON DATABASE sreproject TO sreprojectuser;')
+    # os.system('\\q')
 
 def C_CreateVirtualPythonEnv():
     print("=== C: Creating an Isolated Python Environment ===\n")
