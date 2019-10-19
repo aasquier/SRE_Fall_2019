@@ -102,9 +102,4 @@ def greeting():
     print("  F: Integrate NGINX Web Listener")
     print("  G: Deploy and Test Application")
 
-    shouldContinue = raw_input("\nAre you in the directory where you'd like the Django site code to live? (Y/N): ")
-    if shouldContinue != "Y" and shouldContinue != "y":
-        print("\n*** Please enter appropriate directory before running script.\n")
-        quit()
-
 main()
