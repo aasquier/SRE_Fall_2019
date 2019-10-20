@@ -1,0 +1,4 @@
+### Install Postgres Database locally mac
+(1) /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+(2) brew install postgresql
+(3) brew install nginx
