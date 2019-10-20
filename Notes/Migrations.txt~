@@ -1,0 +1,4 @@
+Steps after changing models:
+(1) Applied changes in models.py
+(2) run `python manage.py makemigrations`
+(3) run `python manage.py migrate`
