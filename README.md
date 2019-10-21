@@ -1,6 +1,6 @@
 ### Install Postgres Database locally mac
-Make sure you are in the virtual environment and it's activated: `source sreprojectenv/bin/activate`
-(1) /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+Make sure you are in the virtual environment and it's activated: `source sreprojectenv/bin/activate`  
+(1) `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 (2) brew install postgresql
 (3) brew install nginx
 
@@ -20,6 +20,6 @@ Pass: MegaPassword
 * Save it: `q.save()`
 * Access data members: `q.question_text`
 * Update members: `q.question_text = "What's up?"`
-* Display all questions in the database: `Question.objects.all()`
+* Display all questions in the database: `Question.objects.all()`  
 
 After local setup you can alter data through `/admin` e.g. http://127.0.0.1:8000/admin/
