@@ -1,8 +1,9 @@
 ### Install Postgres Database locally mac
+
 Make sure you are in the virtual environment and it's activated: `source sreprojectenv/bin/activate`  
-(1) `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-(2) brew install postgresql
-(3) brew install nginx
+1. `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+2. brew install postgresql
+3. brew install nginx
 
 ### Super Secret Credentials:
 Admin Login:
@@ -10,9 +11,9 @@ User: admin
 Pass: MegaPassword
 
 ### Steps after changing models:
-(1) Applied changes in models.py
-(2) run `python manage.py makemigrations` to create migrations for those changes
-(3) run `python manage.py migrate` to apply those changes to the database
+1. Applied changes in models.py
+2. run `python manage.py makemigrations` to create migrations for those changes
+3. run `python manage.py migrate` to apply those changes to the database
 
 ### Alter database examples
 * Enter python interactive mode using `python manage.py shell`
