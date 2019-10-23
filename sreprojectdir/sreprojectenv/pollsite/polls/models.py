@@ -19,7 +19,7 @@ class Question(models.Model):
     was_published_recently.boolean = True
     was_published_recently.short_description = "Published recently?"
 
-
+    
 class Choice(models.Model):
     def __str__(self):
         return self.choice_text
