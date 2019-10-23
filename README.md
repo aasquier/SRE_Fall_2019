@@ -5,12 +5,13 @@ Make sure you are in the virtual environment and it's activated: `source sreproj
 2. brew install postgresql
 3. brew install nginx
 
-### Super Secret Credentials:
-Admin Login:
-User: admin
-Pass: MegaPassword
+### Super Secret Credentials
 
-### Steps after changing models:
+**Admin Login:**<br>
+User: admin<br>
+Password: MegaPassword<br>
+
+### Steps after changing models
 1. Applied changes in models.py
 2. run `python manage.py makemigrations` to create migrations for those changes
 3. run `python manage.py migrate` to apply those changes to the database
