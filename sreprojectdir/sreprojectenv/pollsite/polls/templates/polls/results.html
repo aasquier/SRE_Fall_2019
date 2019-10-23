@@ -1,9 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>{% load static %}
+        <title>Poll Results!</title>
+        <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/css/main.css' %}">
+    </head>
+    <body>
 <h1>{{ question.question_text }}</h1>
 
 <ul>
 {% for choice in question.choice_set.all %}
     <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
+    {% endfor %}
+    </ul>
 
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+    <a href="{% url 'polls:detail' question.id %}">Vote again?</a><br>
+    <a href="{% url 'polls:index' %}">Go home to view all the polls!</a>
+    </body>
+
+</html>
