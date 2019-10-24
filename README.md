@@ -2,14 +2,23 @@
 
 Make sure you are in the virtual environment and it's activated: `source sreprojectenv/bin/activate`  
 1. `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-2. brew install postgresql
-3. brew install nginx
+2. `brew install postgresql`
+3. `brew install nginx`
 
 ### Super Secret Credentials
 
 **Admin Login:**<br>
 User: admin<br>
 Password: MegaPassword<br>
+
+### Deployment Steps
+Cloud SQL Instance Connection name: `cs410-site-reliability-eng:us-west1:polls-instance`
+1. `python manage.py collectstatic`
+2. `gcloud app deploy`
+
+### Useful GCloud things
+* Display the deployment logs: `gcloud app logs read`
+* Open app in browser: `gcloud app browse`
 
 ### Steps after changing models
 1. Applied changes in models.py
