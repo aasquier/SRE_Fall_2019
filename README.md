@@ -23,8 +23,9 @@ Password: MegaPassword<br>
 
 ### Deployment Steps
 Cloud SQL Instance Connection name: `cs410-site-reliability-eng:us-west1:polls-instance`
-1. `python manage.py collectstatic`
-2. `gcloud app deploy`
+1. Make sure you're in the virtual env: `. sreprojectenv/bin/activate`
+2. `python manage.py collectstatic`
+3. `gcloud app deploy`
 
 ### Useful GCloud things
 * Display the deployment logs: `gcloud app logs read`
