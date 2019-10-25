@@ -5,6 +5,16 @@ Make sure you are in the virtual environment and it's activated: `source sreproj
 2. `brew install postgresql`
 3. `brew install nginx`
 
+### Start & Stop Server
+Using the Django Development Server: `~/sreprojectdir/manage.py runserver 0.0.0.0:8000` <br>
+Using Gunicorn Application Server used for Production (run in `~/sreprojectdir`): `gunicorn --bind 0.0.0.0:8000 sreproject.wsgi` <br>
+
+Website URI Before NGINX: http://34.67.211.3:8000/ <br>
+Website URI W/ NGINX: http://34.67.211.3/ <br>
+Admin Page: http://34.67.211.3:8000/admin/login/?next=/admin/ (use credentials below) <br>
+
+NGINX Config File location: `/etc/nginx/sites-available/sreproject` <br>
+
 ### Super Secret Credentials
 
 **Admin Login:**<br>
