@@ -1,13 +1,12 @@
-### Install Postgres Database locally mac
+### Production URIs
+Make sure the SQL Server is up and running: ./cloud_sql_proxy \
+-instances"cs410-site-reliability-eng:us-west1:polls-instance"=tcp:3306 <br>
+Site URI: https://cs410-site-reliability-eng.appspot.com/polls/
+Admin URI: https://cs410-site-reliability-eng.appspot.com/admin/
 
-Make sure you are in the virtual environment and it's activated: `source sreprojectenv/bin/activate`  
-1. `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-2. `brew install postgresql`
-3. `brew install nginx`
-
-### Start & Stop Server
+### Local URI
 Using the Django Development Server: `~/sreprojectdir/manage.py runserver 0.0.0.0:8000` <br>
-Using Gunicorn Application Server used for Production (run in `~/sreprojectdir`): `gunicorn --bind 0.0.0.0:8000 sreproject.wsgi` <br>
+Using Gunicorn Application Server (run in `~/sreprojectdir`): `gunicorn --bind 0.0.0.0:8000 sreproject.wsgi` <br>
 
 Website URI Before NGINX: http://34.67.211.3:8000/ <br>
 Website URI W/ NGINX: http://34.67.211.3/ <br>
@@ -15,8 +14,13 @@ Admin Page: http://34.67.211.3:8000/admin/login/?next=/admin/ (use credentials b
 
 NGINX Config File location: `/etc/nginx/sites-available/sreproject` <br>
 
-### Super Secret Credentials
+### Install Postgres Database locally mac
+Make sure you are in the virtual environment and it's activated: `source sreprojectenv/bin/activate`  
+1. `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+2. `brew install postgresql`
+3. `brew install nginx`
 
+### Super Secret Credentials
 **Admin Login:**<br>
 User: admin<br>
 Password: MegaPassword<br>
@@ -24,15 +28,16 @@ Password: MegaPassword<br>
 ### Deployment Steps
 Cloud SQL Instance Connection name: `cs410-site-reliability-eng:us-west1:polls-instance`
 1. Make sure you're in the virtual env: `. sreprojectenv/bin/activate`
-2. `python manage.py collectstatic`
-3. `gcloud app deploy`
+2. Make any prior database migrations
+3. `python manage.py collectstatic`
+4. `gcloud app deploy`
 
 ### Useful GCloud things
 * Display the deployment logs: `gcloud app logs read`
 * Open app in browser: `gcloud app browse`
 
-### Steps after changing models
-1. Applied changes in models.py
+### Migrate Database
+1. After making database changes:
 2. run `python manage.py makemigrations` to create migrations for those changes
 3. run `python manage.py migrate` to apply those changes to the database
 
