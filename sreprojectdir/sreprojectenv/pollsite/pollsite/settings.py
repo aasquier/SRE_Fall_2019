@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'm^05l&%^k@y3*1jx41zgyqhj(0^r3tm*%u50e4@@c-gr%tq%h@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '34.67.211.3', '127.0.0.1', 'cs410-site-reliability-eng.appspot.com']
 
 
 # Application definition
@@ -74,15 +74,48 @@ WSGI_APPLICATION = 'pollsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'HOST': 'cs410-site-reliability-eng:us-west1:polls-instance',
-        'NAME': 'polls',
-        'USER': 'admin',
-        'PASSWORD': 'MegaPassword',
+#Old
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'HOST': 'cs410-site-reliability-eng:us-west1:polls-instance',
+#         'NAME': 'sreproject',
+#         'USER': 'admin',
+#         'PASSWORD': 'MegaPassword',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
+# [START db_setup]
+if os.getenv('GAE_APPLICATION', None):
+    # Running on production App Engine, so connect to Google Cloud SQL using
+    # the unix socket at /cloudsql/<your-cloudsql-connection string>
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'HOST': '/cloudsql/cs410-site-reliability-eng:us-west1:polls-instance',
+            'USER': 'admin',
+            'PASSWORD': 'MegaPassword',
+            'NAME': 'sreproject',
+        }
     }
-}
+else:
+    # Running locally so connect to either a local MySQL instance or connect
+    # to Cloud SQL via the proxy.  To start the proxy via command line:
+    #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
+    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+            'NAME': 'sreproject',
+            'USER': 'admin',
+            'PASSWORD': 'MegaPassword',
+        }
+    }
+# [END db_setup]
 
 
 # Password validation
@@ -122,3 +155,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
