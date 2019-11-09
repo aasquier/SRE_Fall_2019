@@ -25,6 +25,14 @@ Edit the NGINX confic file: `editnginx` <br>
 List processes using port 8000: `8000` <br>
 Kill processes using port 8000: `kill8000` <br>
 
+### Create duplicate / Snapshot of instance
+1. Create snapshot using the `sweet-project-instance` selected as the `Source Disk` option: https://console.cloud.google.com/compute/snapshots?showFTMessage=false&project=sreproject&tab=snapshots&snapshotssize=50
+2. Create a new instance and select the snapshot you just created as the `boot disk` option.
+3. Ssh into the instance, login as root, and edit the mysite/mysite/settings.py file and add the instance's IP address into the `ALLOWED_HOSTS` array.
+4. Run the commands `virtual` and `migrate`
+5. Run gunicornm (you may need to run it on a different port like `8001`
+6. You should now be able to hit the site via `http://<ip-address>:8001/polls`
+
 ### Creating a polling question example
 This can also be achieved via the `/admin` endpoint. <br>
 ```
