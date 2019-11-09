@@ -46,6 +46,10 @@ q.choice_set.create(choice_text='Dogs!', votes=0)
 exit()
 ```
 
+### Stop Postgres
+1. `sudo su - postgres`
+2. `/usr/lib/postgresql/9.6/bin/pg_ctl -D /usr/lib/postgresql/ -l /root/mysite/logfile.txt stop`
+
 ### Install Postgres Database & NGINX locally Mac
 Make sure you are in the virtual environment and it's activated: `source sreprojectenv/bin/activate`  
 1. `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
