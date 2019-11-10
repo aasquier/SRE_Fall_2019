@@ -50,6 +50,10 @@ exit()
 1. `sudo su - postgres`
 2. `/usr/lib/postgresql/9.6/bin/pg_ctl -D /usr/lib/postgresql/ -l /root/mysite/logfile.txt stop`
 
+### Start Postgres
+1. Login as your normal user (not root or postgres)
+2. `/usr/lib/postgresql/9.6/bin/pg_ctl -D /root/mysite/db.cluster/ -l /root/mysite/logfile.txt start`
+
 ### Install Postgres Database & NGINX locally Mac
 Make sure you are in the virtual environment and it's activated: `source sreprojectenv/bin/activate`  
 1. `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
