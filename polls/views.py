@@ -6,12 +6,38 @@ from django.utils import timezone
 
 from .models import Choice, Question
 
+import ldclient
+import random
 
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
     context_object_name = "latest_question_list"
 
     def get_queryset(self):
+        ldclient.set_sdk_key("sdk-8e89675e-2e6a-4297-94a6-aa582b659146") 
+        choice = random.choice([True, False]) 
+        if choice is True:
+            user = {
+              "key": "UNIQUE IDENTIFIER",
+              "firstName": "Bob",
+              "lastName": "Loblaw",
+              "custom": {
+                "groups": "beta_testers"
+              }
+            }
+        else:
+            user = {
+              "key": "BRUCE IDENTIFIER",
+              "firstName": "Bruce",
+              "lastName": "Da'Man",
+              "custom": {
+              "groups": "teach"
+              }
+            }
+
+        show_feature = ldclient.get().variation("poll-1", user, False)
+        if not show_feature:
+            return None
         """
         Return the last five published questions (not including those set to be
         published in the future).
