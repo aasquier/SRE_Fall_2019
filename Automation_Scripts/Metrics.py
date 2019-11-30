@@ -5,6 +5,7 @@ import pathlib
 import datetime
 import http.client
 from glob import glob
+from scipy.stats import linregress
 
 
 
@@ -50,6 +51,17 @@ def codes_per_date(files):
     return codes
 
 
+def get_weekly_totals(codes):
+
+    for week in codes:
+        total = 0
+        for key in codes[week]:
+           total += codes[week][key]
+        codes[week].update({'total':total})
+
+    return codes
+
+ 
 def codes_per_week(codes_daily):
     
     codes = {}
@@ -66,8 +78,22 @@ def codes_per_week(codes_daily):
                 elif key != 'week':
                     codes[week][key] = codes_daily[date][key]
 
+    codes = get_weekly_totals(codes)
+
     return codes
 
+
+def linear_regression(codes_weekly):
+    
+    x = []
+    y = []
+
+    for week in codes_weekly:
+        x.append(int(week))
+        y.append(codes_weekly[week]['total'])
+
+    print(x,y)
+    return linregress(x, y)
 
 def main():
     log_file_dir = '/var/log/nginx'
@@ -77,9 +103,17 @@ def main():
 
     codes_weekly = codes_per_week(codes_daily)
 
-    print(files)
-    print(codes_daily)
-    print(codes_weekly)
+    #print(files)
+    #print(codes_daily)
+    #print(codes_weekly)
+
+    # get slope and intercept for estimator
+    M, B, _, _, _ = linear_regression(codes_weekly)
+
+    # make prediction
+    week = 10
+    pred = M * week + B
+    print(pred)
 
 
 if __name__ == '__main__':
