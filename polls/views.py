@@ -38,7 +38,7 @@ class IndexView(generic.ListView):
         show_feature = ldclient.get().variation("poll-1", user, False)
         if not show_feature:
             return None
-        ld_client.get().close()
+        ldclient.get().close()
         """
         Return the last five published questions (not including those set to be
         published in the future).
